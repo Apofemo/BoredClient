@@ -1,0 +1,73 @@
+﻿@page "/"
+
+@using BoredClient.Components
+@using BoredClient.Models
+
+@if (Result != null && Result.Key != 0)
+{
+    <BoredCard 
+        Data="Result"
+        OnBookmarkAddClick="SaveToFavorites"/>
+}
+else if (Result != null && Result.Key == 0)
+{
+    <MudCard Class="rounded-xl p-1" Elevation="6" Style="margin: 20px;">
+        <MudCardHeader>
+            <MudText Typo="Typo.h5">There are nothing with your filtres</MudText>
+        </MudCardHeader>
+    </MudCard>
+}
+
+<div class="footerFrame">
+        <MudCard Class="footerBlock rounded-xl" Elevation="6">
+            <div class="footer">
+                    <MudIconButton Class="footerButton" Size="Size.Large" Icon="@Icons.Rounded.ModelTraining" OnClick="GetActivity"/>
+                    <MudIconButton Class="footerButton" Size="Size.Large" Icon="@Icons.Rounded.Bookmarks" OnClick="OpenFavoritesDialog" />
+                    <MudIconButton Class="footerButton" Size="Size.Large" Icon="@Icons.Rounded.Settings" OnClick="OpenPreferencesDialog" />
+            </div>
+            <LineLoader IsActive="IsSearching" />
+        </MudCard>
+</div>
+
+<style>
+    .footerButton {
+        background-color: transparent;
+        padding: 40px;
+        z-index: 5;
+    }
+
+    .footerButton:focus{
+        background-color: transparent;
+    }
+
+    .footerFrame{
+        position: fixed;
+        display: flex;
+        clear: both;
+        width: 100%;
+        bottom: 0;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .footerBlock{
+        z-index: 1;
+        position: relative;
+        display: flex;
+        background: #373740;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .footer{
+        height: 70px;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
+</style>

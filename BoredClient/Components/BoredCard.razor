@@ -1,0 +1,58 @@
+﻿<MudCard Class="rounded-xl p-1 favoritesItem" Elevation="6" Style="margin: 20px;">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">@Data.Activity</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            @if (IsFavoriteItem)
+            {
+                <MudIconButton Size="Size.Large" Icon="@Icons.Rounded.BookmarkRemove" Color="Color.Default" OnClick="OnBookmarkAddClick" />
+            }
+            else if (Data.Saved)
+            {
+                <MudIconButton Size="Size.Large" Icon="@Icons.Rounded.BookmarkAdded" Color="Color.Default" OnClick="OnBookmarkAddClick" />
+            }
+            else
+            {
+                <MudIconButton Size="Size.Large" Icon="@Icons.Rounded.BookmarkAdd" Color="Color.Default" OnClick="OnBookmarkAddClick" />
+            }
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudStack AlignItems="AlignItems.Start" Spacing="1">
+            <MudText Typo="Typo.h6">@Data.Type.ToString()</MudText>
+
+            <MudRating ReadOnly="true"
+                    Style="color: lightgray"
+                    FullIcon="@Icons.Filled.MonetizationOn"
+                    SelectedValue="Price"
+                    MaxValue="Price" />
+
+            <MudRating ReadOnly="true"
+                    Style="color: lightgray"
+                    FullIcon="@Icons.Filled.Person"
+                    EmptyIcon="@Icons.Outlined.Person"
+                    SelectedValue="Data.Participants"
+                    MaxValue="Data.Participants" />
+
+            <MudRating ReadOnly="true"
+                    Style="color: lightgray"
+                    FullIcon="@(Accessibility == 0 ? Icons.Rounded.StarBorder : Icons.Rounded.Star)"
+                    EmptyIcon="@Icons.Rounded.StarBorder"
+                    SelectedValue="Accessibility"
+                    MaxValue="Accessibility" />
+        </MudStack>
+    </MudCardContent>
+@if (!string.IsNullOrWhiteSpace(Data.Link))
+{
+    <MudCardActions>
+        <MudLink Href="@Data.Link">Read more</MudLink>
+    </MudCardActions>
+}
+</MudCard>
+
+<style>
+    .favoritesItem {
+        margin: 10px 0 20px 0;
+    }
+</style>

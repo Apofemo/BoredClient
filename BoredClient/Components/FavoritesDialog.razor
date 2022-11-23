@@ -1,0 +1,34 @@
+﻿@using BoredClient.Models
+
+<MudDialog Class="rounded-xl">
+    <DialogContent>
+        <MudContainer Class="favoritesDialog">
+@*            @if (!Favorites.Any())
+            {
+                <MudCard Class="rounded-xl p-1 favoritesItem" Elevation="6">
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h5">C'mon, save something!</MudText>
+                    </MudCardHeader>
+                </MudCard>
+            }*@
+            @foreach (var item in Favorites)
+            {
+                <BoredCard 
+                    IsFavoriteItem="true"
+                    Data="item"
+                    OnBookmarkAddClick="@(() => RemoveFromFavorites(item.Key))" />
+            }
+        </MudContainer>
+    </DialogContent>
+</MudDialog>
+
+<style>
+    .favoritesDialog{
+        overflow-y: scroll;
+        max-height: calc(100vh - 165px);
+    }
+
+    .mud-dialog .mud-dialog-content{
+        padding: 10px 0 10px 0;
+    }
+</style>

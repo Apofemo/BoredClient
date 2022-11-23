@@ -1,0 +1,77 @@
+﻿@using BoredClient.Models.Enums
+
+<MudDialog Class="rounded-xl">
+    <DialogContent>
+        <MudSimpleTable Elevation="0">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <MudSelect @bind-Value="Preferences.SelectedType">
+                            @foreach (BoredType item in Enum.GetValues(typeof(BoredType)))
+                            {
+                                <MudSelectItem Value="@item">@item</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudRating @bind-SelectedValue="Preferences.SelectedPriceInt"
+                            FullIcon="@Icons.Filled.MonetizationOn"
+                            EmptyIcon="@Icons.Outlined.MonetizationOn" />
+                    </td>
+                    <td class="maxWidthcolumn">
+                        <div>@Preferences.SelectedPrice</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudRating @bind-SelectedValue="Preferences.SelectedParticipants"
+                                   FullIcon="@Icons.Filled.Person"
+                                   EmptyIcon="@Icons.Outlined.Person" />
+                    </td>
+                    <td class="maxWidthcolumn">
+                        @if (Preferences.SelectedParticipants == 0)
+                        {
+                            <div>Any</div>
+                        }
+                        else
+                        {
+                            <div>For @Preferences.SelectedParticipants</div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <MudRating @bind-SelectedValue="Preferences.SelectedAccessibilityInt"
+                                   FullIcon="@Icons.Rounded.Star"
+                                   EmptyIcon="@Icons.Rounded.StarBorder" />
+                    </td>
+                    <td class="maxWidthcolumn">
+                        <div>@Preferences.SelectedAccessibility</div>
+                    </td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+    </DialogContent>
+    <DialogActions>
+        <MudIconButton Icon="@Icons.Rounded.Refresh" OnClick="Clear" />
+        <MudIconButton Icon="@Icons.Rounded.Close" Color="Color.Error" OnClick="Cancel" />
+        <MudIconButton Icon="@Icons.Rounded.Done" Color="Color.Success" OnClick="Submit" />
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .typeColumn {
+        width: 0;
+    }
+
+    .typeText{
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .maxWidthcolumn{
+        width: 100%;
+    }
+</style>
